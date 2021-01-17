@@ -6,20 +6,14 @@ class Messages
   include Generator
   include Repl
 
-  # def initialize
-  # end
   def run_repl
     choices
   end
 
   def message_to_screen(crypt)
-     p crypt
-    # file = File.open("users.txt")
-    # file_data = file.read
-    # file_data = file.readlines.map(&:chomp)
-    # './translated/encrypted.txt'
+    # p crypt
     # require "pry"; binding.pry
-    # p "Created with the key 82648 and date 240818"
+    p "Created #{crypt} with the key #{crypt[:key]} and #{crypt[:date]}"
     # p './translated/encrypted.txt'
     # {:encryption=>"wpcicknlfwv", :key=>"65950", :date=>"160121"}
     # file.close
