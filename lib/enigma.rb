@@ -103,7 +103,7 @@ class Enigma < Messages
   end
 
   # def message_handling
-  #   file_read_write
+  #   message_to_txt
   #   #
   #   # handle = File.open(ARGV[0], "r")
   #   #
