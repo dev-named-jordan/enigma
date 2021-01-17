@@ -11,16 +11,24 @@ class GeneratorTest < Minitest::Test
     @message2 = './data/message_hello_world'
     @message3 = './data/message_to_encrypt'
     @user_key = "02715"
-    @random_key = ""
     @user_date = "040895"
     @random_date = Time.now.strftime("%d%m%y")
   end
 
   def test_alphabet
+    assert_equal ["a",
+ "b", "c", "d", "e", "f", "g", "h", "i",
+ "j", "k", "l", "m", "n", "o", "p", "q",
+ "r", "s", "t", "u", "v", "w", "x", "y",
+ "z", " "], @enigma.alphabet
   end
 
   def test_date_generator
-    
+    random_date = mock
+
+    Enigma.any_instance.stubs(:date_generator).returns(random_date)
+
+    assert_equal random_date, @enigma.date_generator
   end
 
   def test_key_generator
