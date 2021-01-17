@@ -11,12 +11,7 @@ class Messages
   end
 
   def message_to_screen(crypt)
-    # p crypt
-    # require "pry"; binding.pry
     p "Created #{ARGV[1]} with the key #{crypt[:key]} and #{crypt[:date]}"
-    # p './translated/encrypted.txt'
-    # {:encryption=>"wpcicknlfwv", :key=>"65950", :date=>"160121"}
-    # file.close
   end
 
   def message_to_txt(crypt_type)
