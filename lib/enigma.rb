@@ -1,10 +1,8 @@
 require './lib/messages'
-
+require 'date'
 require 'time'
 
 class Enigma < Messages
-
-# class Enigma
 
   def initialize
     @alphabet = ("a".."z").to_a << " "
@@ -17,7 +15,6 @@ class Enigma < Messages
   def date_to_offset_elements(date)
     squared = (date.to_i ** 2)
     squared.to_s[-4..-1].to_i.digits.reverse
-    # require "pry"; binding.pry
   end
 
   def key_as_elements(key)
@@ -36,7 +33,6 @@ class Enigma < Messages
     joined_sub_key_array.each_with_index do |sub_key_element, index|
       key_with_index[sub_key_element.to_i] = index
     end
-    # require "pry"; binding.pry
     key_with_index
   end
 
@@ -44,7 +40,6 @@ class Enigma < Messages
     sub_keys_array = sub_key_with_index(key).keys
     date_offset_array = date_to_offset_elements(date)
     compared = [sub_key_with_index(key).keys, date_to_offset_elements(date)]
-# require "pry"; binding.pry
     compared.transpose.map(&:sum)
   end
 
@@ -72,7 +67,6 @@ class Enigma < Messages
       final_number = alphabet_rotor.rotate(number_rotor.first)
       message_element_array.push(final_number.first)
     end
-    # require "pry"; binding.pry
     message_element_array
   end
 
@@ -85,43 +79,16 @@ class Enigma < Messages
       final_number = alphabet_rotor.rotate(-number_rotor.first)
       message_element_array.push(final_number.first)
     end
-    # require "pry"; binding.pry
     message_element_array
   end
 
   def encrypt_message(message, key, date)
-    # file io open and clean_message if none is provided
-    #date strftime for date, if none provided
-    #generate random key
-    # require "pry"; binding.pry
     number_to_encrypted_array(message, key, date).join("")
   end
 
   def decrypt_message(message, key, date)
-    # require "pry"; binding.pry
     number_to_decrypted_array(message, key, date).join("")
   end
-
-  # def message_handling
-  #   message_to_txt
-  #   #
-  #   # handle = File.open(ARGV[0], "r")
-  #   #
-  #   # message = handle.read
-  #   #
-  #   # handle.close
-  #   #
-  #   # encrypter = encrypt(message, key, date)
-  #   #
-  #   # # decrypt = ''
-  #   #
-  #   # writer = File.open(ARGV[1], "w")
-  #   #
-  #   # writer.write(encrypter)
-  #   #
-  #   # writer.close
-  #
-  # end
 
   def encrypt(message, key = key_generator, date = date_generator)
     expected = Hash.new(0)

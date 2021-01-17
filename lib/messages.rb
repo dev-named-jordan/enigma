@@ -1,42 +1,41 @@
 require './lib/generator'
+require './lib/enigma_repl'
 
 class Messages
-  include Generator
-# class Messages < Enigma
-  def initialize
 
+  include Generator
+  include Repl
+
+  def run_repl
+    choices
   end
 
-  def message_to_screen(crypter)
-     p crypter
-    # file = File.open("users.txt")
-    # file_data = file.read
-    # file_data = file.readlines.map(&:chomp)
-    # './translated/encrypted.txt'
+  def message_to_screen(crypt)
+    # p crypt
     # require "pry"; binding.pry
-    # p "Created with the key 82648 and date 240818"
+    p "Created #{crypt} with the key #{crypt[:key]} and #{crypt[:date]}"
     # p './translated/encrypted.txt'
     # {:encryption=>"wpcicknlfwv", :key=>"65950", :date=>"160121"}
     # file.close
   end
 
-  def message_to_txt
-
+  def message_to_txt(crypt_type)
     handle = File.open(ARGV[0], "r")
-
     message = handle.read
-
     handle.close
 
-    crypter = (encrypt(message, key_generator, date_generator))
-    #  (decrypt(message, key_generator, date_generator))
+    crypt = decrypt(message, key_generator, date_generator) if crypt_type == "decrypt"
 
-    message_to_screen(crypter)
+    crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
+
+    puts "\n\n\n"
+
+    message_to_screen(crypt)
+
+    puts  "\n"
 
     writer = File.open(ARGV[1], "w")
-
-    writer.write(crypter)
-
+    writer.write(crypt)
     writer.close
   end
 

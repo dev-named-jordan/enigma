@@ -1,3 +1,4 @@
+require 'time'
 require 'date'
 
 module Generator
