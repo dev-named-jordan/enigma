@@ -4,10 +4,6 @@ require 'time'
 
 class Enigma < Messages
 
-  def initialize
-    @alphabet = ("a".."z").to_a << " "
-  end
-
   def cleaned_input_message_to_elements(message)
     message.downcase.strip.split("")
   end
@@ -45,7 +41,7 @@ class Enigma < Messages
 
   def alphabet_with_index
     alphabet_with_index = Hash.new
-    @alphabet.each_with_index do |letter_element, index|
+    alphabet.each_with_index do |letter_element, index|
       alphabet_with_index[letter_element] = index
     end
     alphabet_with_index
@@ -74,7 +70,7 @@ class Enigma < Messages
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
       number = 0 if number.nil?
-      alphabet_rotor = @alphabet.rotate(number)
+      alphabet_rotor = alphabet.rotate(number)
       number_rotor = create_shift_values(key, date).rotate(index)
       final_number = alphabet_rotor.rotate(-number_rotor.first)
       message_element_array.push(final_number.first)
