@@ -1,10 +1,10 @@
-# require './lib/messages'
-
-# class Enigma < Messages
+require './lib/messages'
 
 require 'time'
 
-class Enigma
+class Enigma < Messages
+
+# class Enigma
 
   def initialize
     @alphabet = ("a".."z").to_a << " "
@@ -102,35 +102,34 @@ class Enigma
     number_to_decrypted_array(message, key, date).join("")
   end
 
-  # def file_read_write
-  #
-  #   handle = File.open(ARGV[0], "r")
-  #
-  #   message = handle.read
-  #
-  #   handle.close
-  #
-  #   encrypter = encrypt(message, key, date)
-  #
-  #   # decrypt = ''
-  #
-  #   writer = File.open(ARGV[1], "w")
-  #
-  #   writer.write(encrypter)
-  #
-  #   writer.close
+  # def message_handling
+  #   file_read_write
+  #   #
+  #   # handle = File.open(ARGV[0], "r")
+  #   #
+  #   # message = handle.read
+  #   #
+  #   # handle.close
+  #   #
+  #   # encrypter = encrypt(message, key, date)
+  #   #
+  #   # # decrypt = ''
+  #   #
+  #   # writer = File.open(ARGV[1], "w")
+  #   #
+  #   # writer.write(encrypter)
+  #   #
+  #   # writer.close
   #
   # end
 
-  # def encrypt(message = messages.file_read_write, key, date)
-
-  def date_generator
-    Time.now.strftime("%d%m%y")
-  end
-
-  def key_generator
-    (0..99999).to_a.sample.to_s.rjust(5, "0")[0..4]
-  end
+  # def date_generator
+  #   Time.now.strftime("%d%m%y")
+  # end
+  #
+  # def key_generator
+  #   (0..99999).to_a.sample.to_s.rjust(5, "0")[0..4]
+  # end
 
   def encrypt(message, key = key_generator, date = date_generator)
     expected = Hash.new(0)

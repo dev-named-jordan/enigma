@@ -1,9 +1,9 @@
-# require './lib/enigma'
-#
-# # enigma_1 = Enigma.new
-# #
-# # enigma_1.file_read_write
-#
+require './lib/enigma'
+
+enigma_1 = Enigma.new
+
+enigma_1.file_read_write
+
 # messages_1 = Messages.new
 #
 # messages_1.encrypt(message, key, date)
