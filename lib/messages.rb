@@ -1,12 +1,22 @@
 require './lib/generator'
 require './lib/enigma_repl'
+require './lib/crypt'
 
 class Messages
   include Generatable
+  include Cryptable
   include Repl
 
   def run_repl
     choices
+  end
+
+  def encrypt_message(message, key, date)
+    number_to_encrypted_array(message, key, date).join("")
+  end
+
+  def decrypt_message(message, key, date)
+    number_to_decrypted_array(message, key, date).join("")
   end
 
   def message_to_screen(crypt)

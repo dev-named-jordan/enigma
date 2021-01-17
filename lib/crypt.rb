@@ -45,11 +45,9 @@ module Cryptable
   end
 
   def original_numbers_for_message(message)
-    original_numbers_for_message = []
-    cleaned_input_message_to_elements(message).each do |letter|
-      original_numbers_for_message.push(alphabet_with_index[letter])
+    cleaned_input_message_to_elements(message).map do |letter|
+      alphabet_with_index[letter]
     end
-    original_numbers_for_message
   end
 
   def number_to_encrypted_array(message, key, date)
@@ -73,13 +71,5 @@ module Cryptable
       message_element_array.push(final_number.first)
     end
     message_element_array
-  end
-
-  def encrypt_message(message, key, date)
-    number_to_encrypted_array(message, key, date).join("")
-  end
-
-  def decrypt_message(message, key, date)
-    number_to_decrypted_array(message, key, date).join("")
   end
 end

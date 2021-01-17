@@ -22,15 +22,3 @@ class Enigma < Messages
     expected
   end
 end
-
-#   include Encrypt
-#   include Decrypt
-#   attr_reader :key, :date
-#
-#   def initialize(message, key = key_generator, date = date_generator)
-#     @crypt = Hash.new(0)
-#     @key = crypt[:key]
-#     @date = crypt[:date]
-#     # encrypt(message, key = key_generator, date = date_generator)
-#   end
-# end
