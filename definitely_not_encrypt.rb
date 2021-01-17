@@ -1,9 +1,8 @@
 require './lib/enigma'
 
 enigma_1 = Enigma.new
-enigma_1.message_to_txt("encrypt")
-enigma_1.message_to_txt("decrypt")
-# enigma_1.run_repl
+
+enigma_1.run_repl
 # def choices
 #   puts "\n\n-- Welcome to The Enigma codebreaker.
 #   Please choose your option by typing Encrypt or Decrypt into the console,

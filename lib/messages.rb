@@ -1,14 +1,19 @@
 require './lib/generator'
+require './lib/enigma_repl'
 
 class Messages
-  include Generator
-# class Messages < Enigma
-  def initialize
 
+  include Generator
+  include Repl
+
+  # def initialize
+  # end
+  def run_repl
+    choices
   end
 
-  def message_to_screen(crypter)
-     p crypter
+  def message_to_screen(crypt)
+     p crypt
     # file = File.open("users.txt")
     # file_data = file.read
     # file_data = file.readlines.map(&:chomp)
@@ -20,23 +25,23 @@ class Messages
     # file.close
   end
 
-  def message_to_txt
-
+  def message_to_txt(crypt_type)
     handle = File.open(ARGV[0], "r")
-
     message = handle.read
-
     handle.close
 
-    crypter = (encrypt(message, key_generator, date_generator))
-    #  (decrypt(message, key_generator, date_generator))
+    crypt = decrypt(message, key_generator, date_generator) if crypt_type == "decrypt"
 
-    message_to_screen(crypter)
+    crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
+
+    puts "\n\n\n"
+
+    message_to_screen(crypt)
+
+    puts  "\n"
 
     writer = File.open(ARGV[1], "w")
-
-    writer.write(crypter)
-
+    writer.write(crypt)
     writer.close
   end
 
