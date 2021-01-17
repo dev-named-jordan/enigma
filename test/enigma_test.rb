@@ -77,17 +77,23 @@ class EnigmaTest < Minitest::Test
     # :mock_date = mock
     # encrypted = mock
     #
-    encrypted = {
-      # @mock_key,
-      encryption: @mock_encryption,
-      # @mock_key,
-      key: @mock_key,
-      # @mock_date
-      date: @mock_date
-    }
+    # encrypted = {
+    #   # @mock_key,
+    #   encryption: @mock_encryption,
+    #   # @mock_key,
+    #   key: @mock_key,
+    #   # @mock_date
+    #   date: @mock_date
+    # }
     #
     # assert_equal encrypted, @enigma.encrypt(@message)
     #
+
+    encrypted = {
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
     Enigma.any_instance.stubs(:encrypt).returns(encrypted)
 
     assert_equal encrypted, @enigma.encrypt(@message)

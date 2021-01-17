@@ -11,7 +11,6 @@ module Crypt
   end
 
   def key_as_elements(key)
-    # require "pry"; binding.pry
     key.chars
   end
 
@@ -33,7 +32,7 @@ module Crypt
   def create_shift_values(key, date)
     sub_keys_array = sub_key_with_index(key).keys
     date_offset_array = date_to_offset_elements(date)
-    compared = [sub_key_with_index(key).keys, date_to_offset_elements(date)]
+    compared = [sub_keys_array, date_offset_array]
     compared.transpose.map(&:sum)
   end
 
