@@ -3,7 +3,7 @@ require './lib/enigma_repl'
 
 class Messages
 
-  include Generator
+  include Generatable
   include Repl
 
   def run_repl
