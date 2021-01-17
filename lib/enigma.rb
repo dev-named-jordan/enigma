@@ -133,7 +133,6 @@ class Enigma
   end
 
   def encrypt(message, key = key_generator, date = date_generator)
-    # require "pry"; binding.pry
     expected = Hash.new(0)
     expected[:encryption] = encrypt_message(message, key, date)
     expected[:key] = key
@@ -142,7 +141,6 @@ class Enigma
   end
 
   def decrypt(message, key = key_generator, date = date_generator)
-    # require "pry"; binding.pry
     expected = Hash.new(0)
     expected[:decryption] = decrypt_message(message, key, date)
     expected[:key] = key
