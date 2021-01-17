@@ -123,14 +123,6 @@ class Enigma < Messages
   #
   # end
 
-  # def date_generator
-  #   Time.now.strftime("%d%m%y")
-  # end
-  #
-  # def key_generator
-  #   (0..99999).to_a.sample.to_s.rjust(5, "0")[0..4]
-  # end
-
   def encrypt(message, key = key_generator, date = date_generator)
     expected = Hash.new(0)
     expected[:encryption] = encrypt_message(message, key, date)

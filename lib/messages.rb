@@ -1,17 +1,10 @@
-# require './lib/enigma'
+require './lib/generator'
 
 class Messages
+  include Generator
 # class Messages < Enigma
   def initialize
 
-  end
-
-  def date_generator
-    Time.now.strftime("%d%m%y")
-  end
-
-  def key_generator
-    (0..99999).to_a.sample.to_s.rjust(5, "0")[0..4]
   end
 
   def message_to_screen(crypter)
