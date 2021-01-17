@@ -4,6 +4,26 @@ require 'time'
 
 class Enigma < Messages
 
+  # def initialize(message, key = key_generator, date = date_generator)
+  #   @argument = argument
+  #   def encrypt(message, key = key_generator, date = date_generator)
+  #     expected = Hash.new(0)
+  #     expected[:encryption] = encrypt_message(message, key, date)
+  #     expected[:key] = key
+  #     expected[:date] = date
+  #     expected
+  #   end
+  #
+  #   def decrypt(message, key = key_generator, date = date_generator)
+  #     expected = Hash.new(0)
+  #     expected[:decryption] = decrypt_message(message, key, date)
+  #     expected[:key] = key
+  #     expected[:date] = date
+  #     expected
+  #   end
+  # end
+
+
   def cleaned_input_message_to_elements(message)
     message.downcase.strip.split("")
   end
@@ -14,6 +34,7 @@ class Enigma < Messages
   end
 
   def key_as_elements(key)
+    # require "pry"; binding.pry
     key.chars
   end
 
@@ -58,7 +79,7 @@ class Enigma < Messages
   def number_to_encrypted_array(message, key, date)
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
-      alphabet_rotor = @alphabet.rotate(number)
+      alphabet_rotor = alphabet.rotate(number)
       number_rotor = create_shift_values(key, date).rotate(index)
       final_number = alphabet_rotor.rotate(number_rotor.first)
       message_element_array.push(final_number.first)
