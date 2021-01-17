@@ -13,18 +13,19 @@ class Messages
   def message_to_screen(crypt)
     # p crypt
     # require "pry"; binding.pry
-    p "Created #{crypt} with the key #{crypt[:key]} and #{crypt[:date]}"
+    p "Created #{ARGV[1]} with the key #{crypt[:key]} and #{crypt[:date]}"
     # p './translated/encrypted.txt'
     # {:encryption=>"wpcicknlfwv", :key=>"65950", :date=>"160121"}
     # file.close
   end
 
   def message_to_txt(crypt_type)
+    # require "pry"; binding.pry
     handle = File.open(ARGV[0], "r")
     message = handle.read
     handle.close
-
-    crypt = decrypt(message, key_generator, date_generator) if crypt_type == "decrypt"
+# require "pry"; binding.pry
+    crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
 
     crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
 

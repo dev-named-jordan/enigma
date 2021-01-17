@@ -2,6 +2,10 @@ require 'time'
 require 'date'
 
 module Generator
+  def alphabet
+    ("a".."z").to_a << " "
+  end
+
   def date_generator
     Time.now.strftime("%d%m%y")
   end
