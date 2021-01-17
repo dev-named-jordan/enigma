@@ -1,12 +1,17 @@
-require './lib/messages'
-require './lib/crypt'
-require 'date'
-require 'time'
-
-class Decrypt < Enigma
-  include Cryptable
-  def initialize(message, key = key_generator, date = date_generator)
-    # @crypt = Hash.new(0)
-    @crypt[:decryption] = decrypt_message(message, key, date)
-  end
-end
+# require './lib/messages'
+# require './lib/crypt'
+# require 'date'
+# require 'time'
+#
+# module Decrypt
+#   include Cryptable
+#
+#   def decrypt_message(message, key, date)
+#     number_to_decrypted_array(message, key, date).join("")
+#   end
+#
+#   def decrypt_message_input
+#     # @crypt = Hash.new(0)
+#     @crypt[:decryption] = decrypt_message(message, key, date)
+#   end
+# end

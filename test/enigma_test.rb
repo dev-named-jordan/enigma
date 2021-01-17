@@ -72,23 +72,6 @@ class EnigmaTest < Minitest::Test
     assert_equal decrypted, @enigma.decrypt(@encrypted_message_for_160121, @user_key)
     assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], @user_key)
 
-    # :mock_encryption = mock
-    # :mock_key = mock
-    # :mock_date = mock
-    # encrypted = mock
-    #
-    # encrypted = {
-    #   # @mock_key,
-    #   encryption: @mock_encryption,
-    #   # @mock_key,
-    #   key: @mock_key,
-    #   # @mock_date
-    #   date: @mock_date
-    # }
-    #
-    # assert_equal encrypted, @enigma.encrypt(@message)
-    #
-
     encrypted = {
       decryption: "hello world",
       key: "02715",

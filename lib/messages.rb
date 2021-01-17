@@ -14,31 +14,22 @@ class Messages
   end
 
   def message_to_txt(crypt_type)
-    # require "pry"; binding.pry
     handle = File.open(ARGV[0], "r")
     message = handle.read
     handle.close
-# require "pry"; binding.pry
+
     if crypt_type == "decrypt"
       crypt = decrypt(message, ARGV[2], ARGV[3])
     elsif crypt_type == "encrypt"
       crypt = encrypt(message, key_generator, date_generator)
     end
+
     puts "\n\n\n"
-
     message_to_screen(crypt)
-
     puts  "\n"
 
     writer = File.open(ARGV[1], "w")
     writer.write(crypt)
     writer.close
   end
-
-#   $ ruby ./lib/encrypt.rb message.txt encrypted.txt
-# Created 'encrypted.txt' with the key 82648 and date 240818
-# $ ruby ./lib/decrypt.rb encrypted.txt decrypted.txt 82648 240818
-# Created 'decrypted.txt' with the key 82648 and date 240818
-
-#   # ruby encrypt.rb './data/message_hello_world.txt' './translated/encrypted.txt'
 end

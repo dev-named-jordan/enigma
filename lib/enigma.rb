@@ -2,22 +2,9 @@ require 'date'
 require 'time'
 require './lib/messages'
 require './lib/crypt'
-# require './lib/decrypt_enigma'
-# require './lib/encrypt_enigma'
 
 class Enigma < Messages
   include Cryptable
-  attr_reader :key, :date
-  # def initialize
-  # end
-#
-#   def initialize(message, key = key_generator, date = date_generator)
-#     @crypt = Hash.new(0)
-#     @key = crypt[:key]
-#     @date = crypt[:date]
-#     # encrypt(message, key = key_generator, date = date_generator)
-#   end
-# end
 
   def encrypt(message, key = key_generator, date = date_generator)
     expected = Hash.new(0)
@@ -35,3 +22,15 @@ class Enigma < Messages
     expected
   end
 end
+
+#   include Encrypt
+#   include Decrypt
+#   attr_reader :key, :date
+#
+#   def initialize(message, key = key_generator, date = date_generator)
+#     @crypt = Hash.new(0)
+#     @key = crypt[:key]
+#     @date = crypt[:date]
+#     # encrypt(message, key = key_generator, date = date_generator)
+#   end
+# end
