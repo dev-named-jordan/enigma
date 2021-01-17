@@ -87,13 +87,16 @@ class EnigmaTest < Minitest::Test
     }
     #
     # assert_equal encrypted, @enigma.encrypt(@message)
-
-    enigma_1 = Enigma.new
-    #
-    # assert_equal encrypted, enigma_1.encrypt(@message)
     #
     Enigma.any_instance.stubs(:encrypt).returns(encrypted)
 
-    assert_equal encrypted, enigma_1.encrypt(@message)
+    assert_equal encrypted, @enigma.encrypt(@message)
+    assert(@enigma.key_generator.to_i.between?(0, 99999))
+
+    random_key = mock
+
+    Enigma.any_instance.stubs(:key_generator).returns(random_key)
+
+    assert_equal random_key, @enigma.key_generator
   end
 end
