@@ -1,46 +1,37 @@
-require './lib/messages'
-require './lib/crypt'
 require 'date'
 require 'time'
+require './lib/messages'
+require './lib/crypt'
+# require './lib/decrypt_enigma'
+# require './lib/encrypt_enigma'
 
 class Enigma < Messages
-
-  include Crypt
-
+  include Cryptable
   attr_reader :key, :date
+  # def initialize
+  # end
+#
+#   def initialize(message, key = key_generator, date = date_generator)
+#     @crypt = Hash.new(0)
+#     @key = crypt[:key]
+#     @date = crypt[:date]
+#     # encrypt(message, key = key_generator, date = date_generator)
+#   end
+# end
 
-  def initialize(message, key = key_generator, date = date_generator)
-    @crypt = Hash.new(0)
-    @crypt[:encryption] = encrypt_message(message, key, date)
-    @crypt[:decryption] = decrypt_message(message, key, date)
-    @key = crypt[:key]
-    @date = crypt[:date]
-    def encrypt(message, key = key_generator, date = date_generator)
+  def encrypt(message, key = key_generator, date = date_generator)
+    expected = Hash.new(0)
+    expected[:encryption] = encrypt_message(message, key, date)
+    expected[:key] = key
+    expected[:date] = date
+    expected
   end
 
-    def decrypt(message, key = key_generator, date = date_generator)
-      expected = Hash.new(0)
-      expected[:encryption] = encrypt_message(message, key, date)
-      expected[:decryption] = decrypt_message(message, key, date)
-      expected[:key] = key
-      expected[:date] = date
-      expected
-    end
+  def decrypt(message, key = key_generator, date = date_generator)
+    expected = Hash.new(0)
+    expected[:decryption] = decrypt_message(message, key, date)
+    expected[:key] = key
+    expected[:date] = date
+    expected
   end
-
-  # def encrypt(message, key = key_generator, date = date_generator)
-  #   expected = Hash.new(0)
-  #   expected[:encryption] = encrypt_message(message, key, date)
-  #   expected[:key] = key
-  #   expected[:date] = date
-  #   expected
-  # end
-  #
-  # def decrypt(message, key = key_generator, date = date_generator)
-  #   expected = Hash.new(0)
-  #   expected[:decryption] = decrypt_message(message, key, date)
-  #   expected[:key] = key
-  #   expected[:date] = date
-  #   expected
-  # end
 end

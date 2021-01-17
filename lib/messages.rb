@@ -2,7 +2,6 @@ require './lib/generator'
 require './lib/enigma_repl'
 
 class Messages
-
   include Generatable
   include Repl
 
@@ -20,10 +19,11 @@ class Messages
     message = handle.read
     handle.close
 # require "pry"; binding.pry
-    crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
-
-    crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
-
+    if crypt_type == "decrypt"
+      crypt = decrypt(message, ARGV[2], ARGV[3])
+    elsif crypt_type == "encrypt"
+      crypt = encrypt(message, key_generator, date_generator)
+    end
     puts "\n\n\n"
 
     message_to_screen(crypt)

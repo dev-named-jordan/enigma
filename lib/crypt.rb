@@ -1,6 +1,6 @@
 require './lib/generator'
 
-module Crypt
+module Cryptable
   def cleaned_input_message_to_elements(message)
     message.downcase.strip.split("")
   end
