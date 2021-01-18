@@ -24,11 +24,15 @@ class MessagesTest < Minitest::Test
   end
 
   def test_message_to_screen
+    expected  = {:decryption=>"hello world", :key=>"02715", :date=>"040895"}
+
+    assert_equal "Created #{ARGV[1]} with the key 02715 and 040895", @enigma.message_to_screen(expected)
+
     expected = {:decryption=>"ye ne kqhls", :key=>"82648", :date=>"240818"}
 
     Enigma.any_instance.stubs(:message_to_screen).returns(expected)
 
-    assert_equal expected , @enigma.message_to_screen
+    assert_equal expected, @enigma.message_to_screen
   end
 
   def test_message_to_text
