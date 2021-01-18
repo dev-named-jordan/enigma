@@ -2,7 +2,6 @@ require './lib/messages'
 require './lib/crypt'
 
 class Enigma
-# class Enigma < Messages
   include Cryptable
   include Messages
 

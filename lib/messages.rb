@@ -3,6 +3,20 @@ require './lib/generator'
 module Messages
   include Generatable
 
+  def cleaned_input_message_to_elements(message)
+    message.downcase.strip.split("")
+  end
+
+  def original_numbers_for_message(message)
+    cleaned_input_message_to_elements(message).map do |letter|
+      if alphabet_with_index[letter].nil?
+        letter
+      else
+        alphabet_with_index[letter] if alphabet.include?(letter)
+      end
+    end
+  end
+
   def encrypt_message(message, key, date)
     number_to_encrypted_array(message, key, date).join("")
   end
