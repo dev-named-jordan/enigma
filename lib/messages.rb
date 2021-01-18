@@ -1,6 +1,7 @@
 require './lib/generator'
 
-class Messages
+module Messages
+# class Messages
   include Generatable
 
   def encrypt_message(message, key, date)
