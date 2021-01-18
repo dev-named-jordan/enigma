@@ -55,25 +55,9 @@ class MessagesTest < Minitest::Test
     message = ARGV[3]
 
     assert_equal ARGV[3], message
+  end
 
-    # args = [ARGV[0], ARGV[1], ARGV[2], ARGV[3]]
-
-    # Enigma.stubs(:message_to_text).returns("hello world !!!!!!!!!!!!")
-    #
-    # assert_equal "hello world !!!!!!!!!!!!", @enigma.message_to_text("encrypt")
-
-    # @enigma.message_to_text(args)
-    #
-    # handle = mock
-    # message = handle.read
-    # handle.close
-    #
-    # crypt_type = "decrypt"
-    #
-    # crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
-    #
-    # assert_equal [], crypt
-
+  def test_crypts
     crypt_type = "encrypt"
 
     crypt = @enigma.encrypt(@message, @user_key, @user_date) if crypt_type == "encrypt"
@@ -89,29 +73,9 @@ class MessagesTest < Minitest::Test
     expected = {:decryption=>"hello world", :key=>"02715", :date=>"040895"}
 
     assert_equal expected, crypt
-
-    # @enigma.message_to_text("encrypt")
-
-    # handle = File.open(ARGV[0].to_s, "r")
-    # message = handle.read
-    #
-
-    # handle.close
-    #
-    # assert_equal "hello world !!!!!!!!!!!!", @enigma.message_to_text("encrypt")
   end
 
-
   def test_message_to_text
-    # ARGV[0] = mock
-    # ARGV[1] = mock
-    # ARGV[2] = mock
-    # ARGV[3] = mock
-    # decrypt = "decrypt"
-    # decrypt = mock
-    #
-    # assert_eqaul nil, @enigma.message_to_text("decrypt")
-
     expected = {:decryption=>"ye ne kqhls", :key=>"82648", :date=>"240818"}
 
     Enigma.any_instance.stubs(:message_to_text).returns(expected)
