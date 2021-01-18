@@ -1,5 +1,3 @@
-require 'date'
-require 'time'
 require './lib/messages'
 require './lib/crypt'
 

@@ -1,14 +1,7 @@
 require './lib/generator'
-require './lib/enigma_repl'
-# require './lib/crypt'
 
 class Messages
   include Generatable
-  include Repl
-
-  def run_repl
-    choices
-  end
 
   def encrypt_message(message, key, date)
     number_to_encrypted_array(message, key, date).join("")
@@ -22,20 +15,15 @@ class Messages
     p "Created #{ARGV[1]} with the key #{crypt[:key]} and #{crypt[:date]}"
   end
 
-  def message_to_txt(crypt_type)
+  def message_to_text(crypt_type)
     handle = File.open(ARGV[0], "r")
     message = handle.read
     handle.close
 
-    if crypt_type == "decrypt"
-      crypt = decrypt(message, ARGV[2], ARGV[3])
-    elsif crypt_type == "encrypt"
-      crypt = encrypt(message, key_generator, date_generator)
-    end
+    crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
+    crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
 
-    puts "\n\n\n"
     message_to_screen(crypt)
-    puts  "\n"
 
     writer = File.open(ARGV[1], "w")
     writer.write(crypt)
