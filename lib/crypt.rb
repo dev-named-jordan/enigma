@@ -57,34 +57,51 @@ module Cryptable
   def number_to_encrypted_array(message, key, date)
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
-      # (number = 0 && index -= index) if number.nil? || (number.class != Integer && (number != " "))
-      if number.nil? || (number.class != Integer && (number != " "))
-        message_element_array << number
-        next
-      else
-        alphabet_rotor = alphabet.rotate(number)
-        number_rotor = create_shift_values(key, date).rotate(index)
-        final_number = alphabet_rotor.rotate(number_rotor.first)
-        message_element_array.push(final_number.first)
+      message_element_array.push(alphabet.rotate(number).rotate(create_shift_values(key, date).rotate(index).first).first) unless number.nil? || (number.class != Integer && (number != " "))
+      message_element_array << number if number.nil? || (number.class != Integer && (number != " "))
       end
+      message_element_array
     end
-    message_element_array
   end
 
   def number_to_decrypted_array(message, key, date)
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
-      # (number = 0 && index -= index) if number.nil? || (number.class != Integer && (number != " "))
-      if number.nil? || (number.class != Integer && (number != " "))
-        message_element_array << number
-        next
-      else
-        alphabet_rotor = alphabet.rotate(number)
-        number_rotor = create_shift_values(key, date).rotate(index)
-        final_number = alphabet_rotor.rotate(-number_rotor.first)
-        message_element_array.push(final_number.first)
-      end
+      message_element_array.push(alphabet.rotate(number).rotate(-(create_shift_values(key, date).rotate(index)).first).first) unless number.nil? || (number.class != Integer && (number != " "))
+      message_element_array << number if number.nil? || (number.class != Integer && (number != " "))
     end
-  message_element_array
-  end
+    message_element_array
 end
+
+# def number_to_encrypted_array(message, key, date)
+#   message_element_array = []
+#   original_numbers_for_message(message).each_with_index do |number, index|
+#     if number.nil? || (number.class != Integer && (number != " "))
+#       message_element_array << number
+#       next
+#     else
+#       alphabet_rotor = alphabet.rotate(number)
+#       number_rotor = create_shift_values(key, date).rotate(index)
+#       final_number = alphabet_rotor.rotate(number_rotor.first)
+#       message_element_array.push(final_number.first)
+#     end
+#   end
+#   message_element_array
+# end
+#
+# def number_to_decrypted_array(message, key, date)
+#   message_element_array = []
+#   original_numbers_for_message(message).each_with_index do |number, index|
+#     if number.nil? || (number.class != Integer && (number != " "))
+#       message_element_array << number
+#       next
+#     else
+#       decrypt_rotate
+#       alphabet_rotor = alphabet.rotate(number)
+#       number_rotor = create_shift_values(key, date).rotate(index)
+#       final_number = alphabet_rotor.rotate(-number_rotor.first)
+#       message_element_array.push(final_number.first)
+#     end
+#   end
+# message_element_array
+# end
