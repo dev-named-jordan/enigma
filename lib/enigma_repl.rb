@@ -1,5 +1,4 @@
 module Repl
-
   def choices
     puts "\n\n-- Welcome to The Enigma codebreaker.
     Please choose your option by typing Encrypt or Decrypt into the console,

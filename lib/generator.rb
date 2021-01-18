@@ -1,7 +1,7 @@
 require 'time'
 require 'date'
 
-module Generator
+module Generatable
   def alphabet
     ("a".."z").to_a << " "
   end
