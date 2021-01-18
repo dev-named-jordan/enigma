@@ -109,4 +109,6 @@ class EnigmaTest < Minitest::Test
 
     assert_equal random_key, @enigma.key_generator
   end
+
+
 end

@@ -36,6 +36,8 @@ class MessagesTest < Minitest::Test
   end
 
   def test_message_to_text
+    # assert_equal [], @enigma.message_to_text("decrypt")
+
     expected = {:decryption=>"ye ne kqhls", :key=>"82648", :date=>"240818"}
 
     Enigma.any_instance.stubs(:message_to_text).returns(expected)
