@@ -17,6 +17,7 @@ module Messages
   end
 
   def message_to_text(crypt_type)
+    # require "pry"; binding.pry
     handle = File.open(ARGV[0], "r")
     message = handle.read
     handle.close
