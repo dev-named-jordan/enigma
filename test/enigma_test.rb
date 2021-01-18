@@ -9,11 +9,9 @@ class EnigmaTest < Minitest::Test
     @message_bang_new = "keder ohulw!"
     @encrypted_message = "keder ohulw"
     @encrypted_message_for_160121 = "nkfaufqdxry"
-    @message1 = './data/message_one_letter_to_encrypt_them_all'
     @message2 = './data/message_hello_world'
     @message3 = './data/message_to_encrypt'
     @user_key = "02715"
-    @random_key = ""
     @user_date = "040895"
     @random_date = Time.now.strftime("%d%m%y")
   end
@@ -36,21 +34,27 @@ class EnigmaTest < Minitest::Test
     assert_equal ["0", "2", "7", "1", "5"], @enigma.key_as_elements(@user_key)
   end
 
-  def test_encrypt_with_user_input
+  def test_date_to_offset_elements
     assert_equal [1, 0, 2, 5], @enigma.date_to_offset_elements(@user_date)
+  end
 
-    expected = {"a"=>0, "b"=>1, "c"=>2, "d"=>3, "e"=>4, "f"=>5, "g"=>6, "h"=>7, "i"=>8, "j"=>9, "k"=>10, "l"=>11, "m"=>12, "n"=>13, "o"=>14, "p"=>15, "q"=>16, "r"=>17, "s"=>18, "t"=>19, "u"=>20, "v"=>21, "w"=>22, "x"=>23, "y"=>24, "z"=>25, " "=>26}
-
-    assert_equal expected, @enigma.alphabet_with_index
+  def test_create_shift_values
     assert_equal [3, 27, 73, 20], @enigma.create_shift_values(@user_key, @user_date)
+  end
+
+  def test_original_numbers_for_message
     assert_equal [7, 4, 11, 11, 14, 26, 22, 14, 17, 11, 3], @enigma.original_numbers_for_message(@message)
     assert_equal [7, 4, 11, 11, 14, 26, 22, 14, 17, 11, 3, "!"], @enigma.original_numbers_for_message(@message_bang)
+  end
+
+  def test_number_to_crypted_array
     assert_equal ["k", "e", "d", "e", "r", " ", "o", "h", "u", "l", "w"], @enigma.number_to_encrypted_array(@message, @user_key, @user_date)
     assert_equal ["k", "e", "d", "e", "r", " ", "o", "h", "u", "l", "w", "!"], @enigma.number_to_encrypted_array(@message_bang, @user_key, @user_date)
-    assert_equal ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"], @enigma.number_to_decrypted_array(@message_bang_new, @user_key, @user_date)
     assert_equal ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], @enigma.number_to_decrypted_array(@encrypted_message, @user_key, @user_date)
-    assert_equal "keder ohulw", @enigma.encrypt_message(@message, @user_key, @user_date)
+    assert_equal ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"], @enigma.number_to_decrypted_array(@message_bang_new, @user_key, @user_date)
+  end
 
+  def test_crypt_with_user_input
     expected = {
       encryption: "keder ohulw",
       key: "02715",
@@ -83,7 +87,9 @@ class EnigmaTest < Minitest::Test
 
     assert_equal decrypted, @enigma.decrypt(@encrypted_message_for_160121, @user_key)
     assert_equal decrypted, @enigma.decrypt(encrypted[:encryption], @user_key)
+  end
 
+  def test_encrypt_with_stubs
     encrypted = {
       decryption: "hello world",
       key: "02715",
@@ -92,6 +98,9 @@ class EnigmaTest < Minitest::Test
     Enigma.any_instance.stubs(:encrypt).returns(encrypted)
 
     assert_equal encrypted, @enigma.encrypt(@message)
+  end
+
+  def test_random_key
     assert(@enigma.key_generator.to_i.between?(0, 99999))
 
     random_key = mock
