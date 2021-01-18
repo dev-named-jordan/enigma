@@ -1,10 +1,9 @@
 require './lib/generator'
 require './lib/enigma_repl'
-require './lib/crypt'
+# require './lib/crypt'
 
 class Messages
   include Generatable
-  include Cryptable
   include Repl
 
   def run_repl

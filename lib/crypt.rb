@@ -46,17 +46,27 @@ module Cryptable
 
   def original_numbers_for_message(message)
     cleaned_input_message_to_elements(message).map do |letter|
-      alphabet_with_index[letter]
+      if alphabet_with_index[letter].nil?
+        letter
+      else
+        alphabet_with_index[letter] if alphabet.include?(letter)
+      end
     end
   end
 
   def number_to_encrypted_array(message, key, date)
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
-      alphabet_rotor = alphabet.rotate(number)
-      number_rotor = create_shift_values(key, date).rotate(index)
-      final_number = alphabet_rotor.rotate(number_rotor.first)
-      message_element_array.push(final_number.first)
+      # (number = 0 && index -= index) if number.nil? || (number.class != Integer && (number != " "))
+      if number.nil? || (number.class != Integer && (number != " "))
+        message_element_array << number
+        next
+      else
+        alphabet_rotor = alphabet.rotate(number)
+        number_rotor = create_shift_values(key, date).rotate(index)
+        final_number = alphabet_rotor.rotate(number_rotor.first)
+        message_element_array.push(final_number.first)
+      end
     end
     message_element_array
   end
@@ -64,12 +74,17 @@ module Cryptable
   def number_to_decrypted_array(message, key, date)
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
-      number = 0 if number.nil?
-      alphabet_rotor = alphabet.rotate(number)
-      number_rotor = create_shift_values(key, date).rotate(index)
-      final_number = alphabet_rotor.rotate(-number_rotor.first)
-      message_element_array.push(final_number.first)
+      # (number = 0 && index -= index) if number.nil? || (number.class != Integer && (number != " "))
+      if number.nil? || (number.class != Integer && (number != " "))
+        message_element_array << number
+        next
+      else
+        alphabet_rotor = alphabet.rotate(number)
+        number_rotor = create_shift_values(key, date).rotate(index)
+        final_number = alphabet_rotor.rotate(-number_rotor.first)
+        message_element_array.push(final_number.first)
+      end
     end
-    message_element_array
-  end
+  message_element_array
+  end 
 end
