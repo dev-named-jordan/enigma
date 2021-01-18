@@ -20,15 +20,10 @@ class Messages
     message = handle.read
     handle.close
 
-    if crypt_type == "decrypt"
-      crypt = decrypt(message, ARGV[2], ARGV[3])
-    elsif crypt_type == "encrypt"
-      crypt = encrypt(message, key_generator, date_generator)
-    end
+    crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
+    crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
 
-    puts "\n\n\n"
     message_to_screen(crypt)
-    puts  "\n"
 
     writer = File.open(ARGV[1], "w")
     writer.write(crypt)
