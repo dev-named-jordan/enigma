@@ -12,6 +12,8 @@ class EnigmaTest < Minitest::Test
     @message2 = './data/message_hello_world'
     @message3 = './data/message_to_encrypt'
     @user_key = "02715"
+    @user_key1 = "02716"
+    @user_key2 = "02717"
     @user_date = "040895"
     @random_date = Time.now.strftime("%d%m%y")
   end
@@ -109,6 +111,4 @@ class EnigmaTest < Minitest::Test
 
     assert_equal random_key, @enigma.key_generator
   end
-
-
 end

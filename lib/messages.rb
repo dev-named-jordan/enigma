@@ -1,7 +1,6 @@
 require './lib/generator'
 
 module Messages
-# class Messages
   include Generatable
 
   def encrypt_message(message, key, date)
@@ -17,18 +16,15 @@ module Messages
   end
 
   def message_to_text(crypt_type)
-    # require "pry"; binding.pry
-    handle = File.open(ARGV[0], "r")
-    message = handle.read
-    handle.close
+    message = File.open(ARGV[0], "r").read
+    File.open(ARGV[0], "r").close
 
     crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
     crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
 
     message_to_screen(crypt)
 
-    writer = File.open(ARGV[1], "w")
-    writer.write(crypt)
-    writer.close
+    File.open(ARGV[1], "w").write(crypt)
+    File.open(ARGV[1], "w").close
   end
 end
