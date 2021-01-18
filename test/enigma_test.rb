@@ -5,6 +5,8 @@ class EnigmaTest < Minitest::Test
   def setup
     @enigma = Enigma.new
     @message = "hello world"
+    @message_bang = "hello world!"
+    @message_bang_new = "keder ohulw!"
     @encrypted_message = "keder ohulw"
     @encrypted_message_for_160121 = "nkfaufqdxry"
     @message1 = './data/message_one_letter_to_encrypt_them_all'
@@ -20,13 +22,21 @@ class EnigmaTest < Minitest::Test
     assert_instance_of Enigma, @enigma
   end
 
-  def test_encrypt_with_user_input
+  def test_clean_input
     assert_equal ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], @enigma.cleaned_input_message_to_elements(@message)
+  end
 
+  def test_sub_key_with_index
     expected = { 02 => 0,  27 => 1,  71 => 2,  15 => 3 }
 
     assert_equal expected, @enigma.sub_key_with_index(@user_key)
+  end
+
+  def test_key_as_elements
     assert_equal ["0", "2", "7", "1", "5"], @enigma.key_as_elements(@user_key)
+  end
+
+  def test_encrypt_with_user_input
     assert_equal [1, 0, 2, 5], @enigma.date_to_offset_elements(@user_date)
 
     expected = {"a"=>0, "b"=>1, "c"=>2, "d"=>3, "e"=>4, "f"=>5, "g"=>6, "h"=>7, "i"=>8, "j"=>9, "k"=>10, "l"=>11, "m"=>12, "n"=>13, "o"=>14, "p"=>15, "q"=>16, "r"=>17, "s"=>18, "t"=>19, "u"=>20, "v"=>21, "w"=>22, "x"=>23, "y"=>24, "z"=>25, " "=>26}
@@ -34,7 +44,10 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma.alphabet_with_index
     assert_equal [3, 27, 73, 20], @enigma.create_shift_values(@user_key, @user_date)
     assert_equal [7, 4, 11, 11, 14, 26, 22, 14, 17, 11, 3], @enigma.original_numbers_for_message(@message)
+    assert_equal [7, 4, 11, 11, 14, 26, 22, 14, 17, 11, 3, "!"], @enigma.original_numbers_for_message(@message_bang)
     assert_equal ["k", "e", "d", "e", "r", " ", "o", "h", "u", "l", "w"], @enigma.number_to_encrypted_array(@message, @user_key, @user_date)
+    assert_equal ["k", "e", "d", "e", "r", " ", "o", "h", "u", "l", "w", "!"], @enigma.number_to_encrypted_array(@message_bang, @user_key, @user_date)
+    assert_equal ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"], @enigma.number_to_decrypted_array(@message_bang_new, @user_key, @user_date)
     assert_equal ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"], @enigma.number_to_decrypted_array(@encrypted_message, @user_key, @user_date)
     assert_equal "keder ohulw", @enigma.encrypt_message(@message, @user_key, @user_date)
 
@@ -43,7 +56,6 @@ class EnigmaTest < Minitest::Test
       key: "02715",
       date: "040895"
       }
-
 
     assert_equal expected, @enigma.encrypt(@message, @user_key, @user_date)
 
