@@ -1,1 +1,1 @@
-{:encryption=>"byexitp lexl!!!!!!!!!!!!", :key=>"71438", :date=>"170121"}
+{:encryption=>"vlnbnjqpl,bmn cr'qbloofplxyewqbxbxrvbjqxs!", :key=>"37257", :date=>"170121"}

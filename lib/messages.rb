@@ -15,7 +15,7 @@ class Messages
     p "Created #{ARGV[1]} with the key #{crypt[:key]} and #{crypt[:date]}"
   end
 
-  def message_to_txt(crypt_type)
+  def message_to_text(crypt_type)
     handle = File.open(ARGV[0], "r")
     message = handle.read
     handle.close

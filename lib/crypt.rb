@@ -86,5 +86,5 @@ module Cryptable
       end
     end
   message_element_array
-  end 
+  end
 end
