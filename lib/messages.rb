@@ -1,6 +1,7 @@
 require './lib/generator'
 
-class Messages
+module Messages
+# class Messages
   include Generatable
 
   def encrypt_message(message, key, date)
@@ -16,6 +17,7 @@ class Messages
   end
 
   def message_to_text(crypt_type)
+    # require "pry"; binding.pry
     handle = File.open(ARGV[0], "r")
     message = handle.read
     handle.close

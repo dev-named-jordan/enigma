@@ -1,8 +1,10 @@
 require './lib/messages'
 require './lib/crypt'
 
-class Enigma < Messages
+class Enigma
+# class Enigma < Messages
   include Cryptable
+  include Messages
 
   def encrypt(message, key = key_generator, date = date_generator)
     expected = Hash.new(0)
