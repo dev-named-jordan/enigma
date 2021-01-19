@@ -4,14 +4,6 @@ class GeneratorTest < Minitest::Test
 
   def setup
     @enigma = Enigma.new
-    @message = "hello world"
-    @encrypted_message = "keder ohulw"
-    @encrypted_message_for_160121 = "nkfaufqdxry"
-    @message1 = './data/message_one_letter_to_encrypt_them_all'
-    @message2 = './data/message_hello_world'
-    @message3 = './data/message_to_encrypt'
-    @user_key = "02715"
-    @user_date = "040895"
     @random_date = Time.now.strftime("%d%m%y")
   end
 
