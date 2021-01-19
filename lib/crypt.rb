@@ -1,4 +1,4 @@
-  require './lib/generator'
+require './lib/generator'
 
 module Cryptable
   def date_to_offset_elements(date)
@@ -15,7 +15,9 @@ module Cryptable
     key_as_elements(key).each_cons(2) { |element| elements_sub_key_array.push(element) }
     joined_sub_key_array = elements_sub_key_array.flat_map { |sub_array| sub_array.join }
     key_with_index = Hash.new
-    joined_sub_key_array.each_with_index { |sub_key_element, index| key_with_index[sub_key_element.to_i] = index }
+    joined_sub_key_array.each_with_index do |sub_key_element, index|
+      key_with_index[sub_key_element.to_i] = index
+    end
     key_with_index
   end
 
