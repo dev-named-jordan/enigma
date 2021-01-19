@@ -37,7 +37,9 @@ module Cryptable
   def number_to_decrypted_array(message, key, date)
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
-      message_element_array.push(alphabet.rotate(number).rotate(-(create_shift_values(key, date).rotate(index)).first).first) unless number.nil? || (number.class != Integer && (number != " "))
+      unless number.nil? || (number.class != Integer && (number != " "))
+        message_element_array.push(alphabet.rotate(number).rotate(-(create_shift_values(key, date).rotate(index)).first).first)
+      end
       message_element_array << number if number.nil? || (number.class != Integer && (number != " "))
     end
     message_element_array
@@ -46,9 +48,11 @@ module Cryptable
   def number_to_encrypted_array(message, key, date)
     message_element_array = []
     original_numbers_for_message(message).each_with_index do |number, index|
-      message_element_array.push(alphabet.rotate(number).rotate(create_shift_values(key, date).rotate(index).first).first) unless number.nil? || (number.class != Integer && (number != " "))
-      message_element_array << number if number.nil? || (number.class != Integer && (number != " "))
+      unless number.nil? || (number.class != Integer && (number != " "))
+        message_element_array.push(alphabet.rotate(number).rotate(create_shift_values(key, date).rotate(index).first).first)
       end
+      message_element_array << number if number.nil? || (number.class != Integer && (number != " "))
+    end
     message_element_array
   end
 end
