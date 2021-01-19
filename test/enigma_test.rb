@@ -15,7 +15,6 @@ class EnigmaTest < Minitest::Test
     @user_key1 = "02716"
     @user_key2 = "02717"
     @user_date = "040895"
-    @random_date = Time.now.strftime("%d%m%y")
   end
 
   def test_it_exists
