@@ -20,12 +20,16 @@ https://github.com/jordanfbeck0528/enigma
 
  - To use these modules with my pre-made text files, in my data_folder, the user can input one of the following commands into the terminal from the enigma root, each will create a different text file from it's ARGV[0] and writing the new file to ARGV[1]  -
 
- - $ruby ./lib/encrypt.rb './data/message_hello_world.txt' './translated/encrypted.txt'
- - $ruby ./lib/encrypt.rb './data/message_hello_world_punctuated.txt' './translated/encrypted.txt'
- - $ruby ./lib/encrypt.rb './data/message_to_encrypt.txt' './translated/encrypted.txt'
- - $ruby ./lib/decrypt.rb './data/message_hello_world.txt' './translated/decrypted.txt' 82648 240818
- - $ruby ./lib/decrypt.rb './data/message_hello_world_decrypt.txt' './translated/decrypted.txt' 02715 040895
-
+  $ruby ./lib/encrypt.rb './data/message_hello_world.txt' './translated/encrypted.txt'
+  
+  $ruby ./lib/encrypt.rb './data/message_hello_world_punctuated.txt' './translated/encrypted.txt'
+  
+  $ruby ./lib/encrypt.rb './data/message_to_encrypt.txt' './translated/encrypted.txt'
+  
+  $ruby ./lib/decrypt.rb './data/message_hello_world.txt' './translated/decrypted.txt' 82648 240818
+  
+  $ruby ./lib/decrypt.rb './data/message_hello_world_decrypt.txt' './translated/decrypted.txt' 02715 040895
+  
  - Enigma - Enigma is the only class I have created. When calling a terminal command from the above list, an instance of the Enigma class is created. Then the Enigma class instance calls on a method from Messagable module, called "message_to_text", inside this method the file at ARGV[0] from the command line argument is processed through the encrypt, or decrypt method from back in the Enigma class.
 
  I felt pretty strong about the OOP section, so I hope my understanding and intuition isn't too far off.
