@@ -84,6 +84,40 @@ class MessagesTest < Minitest::Test
     assert_equal ARGV[3], message
   end
 
+  def test_args_with_decrypt
+    ARGV[2] = @user_key
+    ARGV[3] = @user_date
+    crypt_type = @crypt_type_2
+
+    crypt = @enigma.decrypt(@encrypted_message, @user_key, ARGV[3]) if crypt_type == @crypt_type_2
+
+    expected = {:decryption=>@message, :key=>@user_key, :date=>@user_date}
+
+    assert_equal expected, crypt
+
+    crypt = @enigma.decrypt(@encrypted_message, ARGV[2], ARGV[3]) if crypt_type == @crypt_type_2
+
+    assert_equal expected, crypt
+  end
+
+  def test_args_with_encrypt
+    ARGV[0] = './data/message_hello_world_decrypt.txt'
+    ARGV[1] = @message
+    ARGV[2] = @user_key
+    ARGV[3] = @user_date
+    crypt_type = @crypt_type_1
+
+    crypt = @enigma.encrypt(@message, @user_key, ARGV[3]) if crypt_type == @crypt_type_1
+
+    expected = {:encryption=>@encrypted_message, :key=>@user_key, :date=>@user_date}
+
+    assert_equal expected, crypt
+
+    crypt = @enigma.encrypt(@message, ARGV[2], ARGV[3]) if crypt_type == @crypt_type_1
+
+    assert_equal expected, crypt
+  end
+
   def test_crypts
     crypt_type = "encrypt"
 
@@ -103,10 +137,24 @@ class MessagesTest < Minitest::Test
   end
 
   def test_message_to_text
+    crypt1 = @enigma.encrypt(@message_bang, @user_key, @user_date) if @crypt_type_1 == "encrypt"
+
+    expected = {:encryption=>"keder ohulwt!!!!!!!!!!!!", :key=>"02715", :date=>"040895"}
+
+    assert_equal expected, @enigma.encrypt(@message_bang, @user_key, @user_date)
+    assert_equal expected, crypt1
+
+    crypt2 = @enigma.decrypt("ye ne kqhls!!!!!!!!!!!!", "82648", "240818") if @crypt_type_2 == "decrypt"
+
+    expected = {:decryption=>"oeopv zsylg!!!!!!!!!!!!", :key=>"82648", :date=>"240818"}
+
+    assert_equal expected, @enigma.decrypt("ye ne kqhls!!!!!!!!!!!!", "82648", "240818")
+    assert_equal expected, crypt2
+
     expected = {:decryption=>"ye ne kqhls", :key=>"82648", :date=>"240818"}
 
     Enigma.any_instance.stubs(:message_to_text).returns(expected)
 
-    assert_equal expected , @enigma.message_to_text
+    assert_equal expected, @enigma.message_to_text
   end
 end
