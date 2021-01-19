@@ -3,7 +3,7 @@ require './lib/crypt'
 
 class Enigma
   include Cryptable
-  include Messages
+  include Messagable
 
   def encrypt(message, key = key_generator, date = date_generator)
     expected = Hash.new(0)

@@ -1,6 +1,6 @@
 require './test/test_helper'
 
-class MessagesTest < Minitest::Test
+class MessagableTest < Minitest::Test
 
   def setup
     @enigma        = Enigma.new
