@@ -1,6 +1,6 @@
 require './lib/generator'
 
-module Messages
+module Messagable
   include Generatable
 
   def cleaned_input_message_to_elements(message)
@@ -35,7 +35,7 @@ module Messages
 
     crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
     crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
-  
+
     message_to_screen(crypt)
 
     File.open(ARGV[1], "w").write(crypt)

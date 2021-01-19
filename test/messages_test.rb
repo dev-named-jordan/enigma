@@ -1,6 +1,6 @@
 require './test/test_helper'
 
-class MessagesTest < Minitest::Test
+class MessagableTest < Minitest::Test
 
   def setup
     @enigma        = Enigma.new
@@ -87,6 +87,7 @@ class MessagesTest < Minitest::Test
   def test_args_with_decrypt
     ARGV[2] = @user_key
     ARGV[3] = @user_date
+
     crypt_type = @crypt_type_2
 
     crypt = @enigma.decrypt(@encrypted_message, @user_key, ARGV[3]) if crypt_type == @crypt_type_2
@@ -105,6 +106,7 @@ class MessagesTest < Minitest::Test
     ARGV[1] = @message
     ARGV[2] = @user_key
     ARGV[3] = @user_date
+    
     crypt_type = @crypt_type_1
 
     crypt = @enigma.encrypt(@message, @user_key, ARGV[3]) if crypt_type == @crypt_type_1
