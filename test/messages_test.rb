@@ -43,15 +43,19 @@ class MessagableTest < Minitest::Test
   end
 
   def test_encrypt_message
-    assert_equal "keder ohulw", @enigma.encrypt_message(@message, @user_key, @user_date)
+    assert_equal @encrypted_message, @enigma.encrypt_message(@message, @user_key, @user_date)
   end
 
-  def test_decrypt_message
+  def test_decrypt_dycryption
     assert_equal "eetsl dvoll", @enigma.decrypt_message(@message, @user_key, @user_date)
   end
 
+  def test_decrypt_message
+    assert_equal @message, @enigma.decrypt_message(@encrypted_message, @user_key, @user_date)
+  end
+
   def test_message_to_screen
-    expected  = {:decryption=>"hello world", :key=>"02715", :date=>"040895"}
+    expected  = {:decryption=>@message, :key=>@user_key, :date=>@user_date}
 
     assert_equal "Created #{ARGV[1]} with the key 02715 and 040895", @enigma.message_to_screen(expected)
 
@@ -106,7 +110,7 @@ class MessagableTest < Minitest::Test
     ARGV[1] = @message
     ARGV[2] = @user_key
     ARGV[3] = @user_date
-    
+
     crypt_type = @crypt_type_1
 
     crypt = @enigma.encrypt(@message, @user_key, ARGV[3]) if crypt_type == @crypt_type_1
@@ -121,32 +125,32 @@ class MessagableTest < Minitest::Test
   end
 
   def test_crypts
-    crypt_type = "encrypt"
+    crypt_type = @crypt_type_1
 
-    crypt = @enigma.encrypt(@message, @user_key, @user_date) if crypt_type == "encrypt"
+    crypt = @enigma.encrypt(@message, @user_key, @user_date) if crypt_type == @crypt_type_1
 
-    expected = {:encryption=>"keder ohulw", :key=>"02715", :date=>"040895"}
+    expected = {:encryption=>@encrypted_message, :key=>@user_key, :date=>@user_date}
 
     assert_equal expected, crypt
 
-    crypt_type = "decrypt"
+    crypt_type = @crypt_type_2
 
-    crypt = @enigma.decrypt(@encrypted_message, "02715", "040895") if crypt_type == "decrypt"
+    crypt = @enigma.decrypt(@encrypted_message, @user_key, @user_date) if crypt_type == @crypt_type_2
 
-    expected = {:decryption=>"hello world", :key=>"02715", :date=>"040895"}
+    expected = {:decryption=>@message, :key=>@user_key, :date=>@user_date}
 
     assert_equal expected, crypt
   end
 
   def test_message_to_text
-    crypt1 = @enigma.encrypt(@message_bang, @user_key, @user_date) if @crypt_type_1 == "encrypt"
+    crypt1 = @enigma.encrypt(@message_bang, @user_key, @user_date) if @crypt_type_1 == @crypt_type_1
 
-    expected = {:encryption=>"keder ohulwt!!!!!!!!!!!!", :key=>"02715", :date=>"040895"}
+    expected = {:encryption=>"keder ohulwt!!!!!!!!!!!!", :key=>@user_key, :date=>"040895"}
 
     assert_equal expected, @enigma.encrypt(@message_bang, @user_key, @user_date)
     assert_equal expected, crypt1
 
-    crypt2 = @enigma.decrypt("ye ne kqhls!!!!!!!!!!!!", "82648", "240818") if @crypt_type_2 == "decrypt"
+    crypt2 = @enigma.decrypt("ye ne kqhls!!!!!!!!!!!!", "82648", "240818") if @crypt_type_2 == @crypt_type_2
 
     expected = {:decryption=>"oeopv zsylg!!!!!!!!!!!!", :key=>"82648", :date=>"240818"}
 

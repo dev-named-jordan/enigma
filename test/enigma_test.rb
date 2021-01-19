@@ -96,6 +96,7 @@ class EnigmaTest < Minitest::Test
       key: "02715",
       date: "040895"
       }
+      
     Enigma.any_instance.stubs(:encrypt).returns(encrypted)
 
     assert_equal encrypted, @enigma.encrypt(@message)
