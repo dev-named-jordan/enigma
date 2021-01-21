@@ -33,12 +33,16 @@ module Messagable
     message = File.open(ARGV[0], "r").read
     File.open(ARGV[0], "r").close
 
-    crypt = decrypt(message, ARGV[2], ARGV[3]) if crypt_type == "decrypt"
-    crypt = encrypt(message, key_generator, date_generator) if crypt_type == "encrypt"
-
-    message_to_screen(crypt)
-
-    File.open(ARGV[1], "w").write(crypt)
-    File.open(ARGV[1], "w").close
+    if crypt_type == "decrypt"
+      crypt = decrypt(message, ARGV[2], ARGV[3])
+      message_to_screen(crypt)
+      File.open(ARGV[1], "w").write(crypt[:decryption])
+      File.open(ARGV[1], "w").close
+    elsif crypt_type == "encrypt"
+      crypt = encrypt(message, key_generator, date_generator)
+      message_to_screen(crypt)
+      File.open(ARGV[1], "w").write(crypt[:encryption])
+      File.open(ARGV[1], "w").close
+    end
   end
 end
